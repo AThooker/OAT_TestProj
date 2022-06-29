@@ -1,0 +1,39 @@
+﻿@page "/projects"
+@using TestOAT.Data
+<h3>Projects</h3>
+
+
+<ul>
+	@foreach(var proj in projects)
+	{
+		<li>
+			<input type="checkbox" @bind="proj.IsCompleted"/>
+			<input @bind="proj.Description"/>
+			<button @onclick="CompletedProj">Completed</button>
+			<button @onclick="SoldProj">Sold</button>
+		</li>
+	}
+</ul>
+
+<input placeholder="Project Description" @bind="newProj"/>
+<button @onclick="AddProj">Add Project</button>
+@code {
+	private List<Project> projects = new();
+	private string? newProj;
+	private void AddProj()
+	{
+		if(!string.IsNullOrWhiteSpace(newProj))
+		{
+			projects.Add(new Project { Description = newProj });
+			newProj = string.Empty;
+		}
+	}
+	private void CompletedProj()
+	{
+		//if proj is marked as completed, set IsCompleted to true, move to separate list
+	}
+	private void SoldProj()
+	{
+		//if proj is marked as sold, set Sold to true, movie to separate list
+	}
+}
